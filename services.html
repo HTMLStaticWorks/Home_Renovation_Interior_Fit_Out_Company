@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore Guild & Gable Renovations services: real-time milestone tracking, custom interior design styles, and professional contracting packages.">
+  <meta name="keywords" content="renovation services, custom kitchen remodeling, bathroom design, interior fit-outs, contracting specialists">
+  <meta name="author" content="Guild & Gable">
+  <title>Guild & Gable — Services & Design Packages</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4AF37'><path d='M2 19h20v2H2zm10-17L3 9h4v8h10V9h4L12 2zm3 13H9V9h6v6z'/></svg>">
+
+  <!-- Google Fonts - Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dark-mode.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+</head>
+<body class="services-page">
+
+  <!-- ==========================================================================
+       Header / Navigation Bar
+       ========================================================================== */ -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-rallyx">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand navbar-brand-logo" href="index.html">
+        <div class="brand-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M2 19h20v2H2zm10-17L3 9h4v8h10V9h4L12 2zm3 13H9V9h6v6z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Guild & Gable</span>
+          <span class="brand-sub"></span>
+        </div>
+      </a>
+
+      <!-- Mobile Toggle -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-bar"></span>
+        <span class="navbar-toggler-bar"></span>
+        <span class="navbar-toggler-bar"></span>
+      </button>
+
+      <!-- Navigation Links -->
+      <div class="collapse navbar-collapse navbar-collapse-mobile" id="mainNavbar">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu border-0 shadow-sm glass-card p-2">
+              <li><a class="dropdown-item rounded-3 py-2" href="index.html">Home</a></li>
+              <li><a class="dropdown-item rounded-3 py-2" href="home-2.html">Home 2</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="dashboard.html">Dashboard</a>
+          </li>
+        </ul>
+
+        <!-- Right Side Utility Controls & CTAs -->
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <!-- RTL Switcher -->
+          <button class="utility-btn font-monospace" id="rtl-toggle" title="Toggle Text Direction" aria-label="Toggle RTL direction">RTL</button>
+          
+          <!-- Theme Toggle -->
+          <button class="utility-btn" id="theme-toggle" title="Toggle Light/Dark Mode" aria-label="Toggle dark mode">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-moon-fill" viewBox="0 0 16 16">
+              <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.277 7.277a7.21 7.21 0 0 0 3.46-.878.767.767 0 0 1 .858.08.77.767 0 0 1 .08.858 7.211 7.211 0 0 1-7.602 4.168 7.272 7.272 0 0 1-5.677-5.677 7.27 7.27 0 0 1 4.169-7.601z"/>
+            </svg>
+          </button>
+
+          <!-- Login (Secondary CTA) -->
+          <a href="login.html" class="btn-premium-outline">Login</a>
+
+          <!-- Book Now (Primary CTA) -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       Hero Banner
+       ========================================================================== -->
+  <section class="page-hero services-hero">
+    <div class="page-hero-overlay"></div>
+    <div class="container page-hero-content">
+      <div class="row align-items-center">
+        <div class="col-lg-6 text-center text-lg-start reveal">
+          <span class="section-tag" style="color: var(--accent);">Our Offerings</span>
+          <h1 class="text-white mb-3 page-hero-title-bar" style="font-size: clamp(32px, 5vw, 56px);">Our Premium Offerings</h1>
+          <p class="mx-auto mx-lg-0 mb-4" style="max-width: 600px; color: rgba(255,255,255,0.85);">Browse our spatial remodeling services, custom design styles, and specialty craftsmanship options.</p>
+        </div>
+        <div class="col-lg-6 reveal text-center mt-4 mt-lg-0">
+          <img src="https://tfrenovation.com.my/wp-content/uploads/2024/09/office-renovation-kl.jpeg" alt="Services Guild & Gable" class="img-fluid rounded-4 shadow-lg border border-white border-opacity-10" style="max-height: 420px; width: 100%; object-fit: cover;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Remodeling Service Section
+       ========================================================================== */ -->
+  <section>
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 reveal-left">
+          <span class="section-tag">01 / RENOVATIONS</span>
+          <h2 class="section-title">Premium Spatial Remodeling</h2>
+          <p>We execute three tiers of luxury-grade residential makeovers. Each space layout features integrated ambient lighting, custom wainscoting, double-height ceilings, and private walk-in vanity suites to ensure a flawless living experience.</p>
+          <ul class="list-unstyled mb-4">
+            <li class="mb-3 d-flex align-items-start gap-3">
+              <div class="flex-shrink-0 mt-1" style="color: var(--accent);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
+                  <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.117.343zm1.41 1.41a7 7 0 0 0-.7-.785l.682-.73c.29.27.564.56.821.87l-.8.645zm1.082 2.05c-.13-.367-.285-.718-.466-1.05l.884-.467c.213.393.394.808.54 1.24zm.446 2.083c-.027-.384-.078-.76-.153-1.127l.983-.173c.09.438.15.889.182 1.34l-1.012-.04zm0 2.008a7 7 0 0 0-.153 1.127l.983.173a8 8 0 0 1 .182-1.34zm-1.082 2.05a7 7 0 0 0 .466-1.05l.884.467c-.213.393-.394.808-.54 1.242zm-1.41 1.41c.203-.243.39-.5.561-.77l.848.53a8 8 0 0 1-.87 1.07zm-2.004.45a7 7 0 0 0 .985-.299l.219.976c-.383.086-.76.2-1.117.343zm-2.044.134a7 7 0 0 0 .98-.073l.162.987a8 8 0 0 1-1.34-.182zm-2.008-.446a7 7 0 0 0 .985-.299l.219.976c-.383.086-.76.2-1.117.343zm-1.41-1.41a8 8 0 0 1-.87-1.07l.848-.53c.17.27.358.528.561.77zm-1.082-2.05a8 8 0 0 1-.54-1.242l.884-.467c.18.332.336.683.466 1.05zm-.446-2.083c.03-.45.09-.897.182-1.34l.983.173a7 7 0 0 0-.153 1.127zm0-2.008c-.027-.384-.078-.76-.153-1.127l.983-.173c.09.438.15.889.182 1.34zm1.082-2.05a7 7 0 0 0-.466 1.05l-.884-.467c.213-.393.394-.808.54-1.24zm1.41-1.41a7 7 0 0 0 .7.785l-.682.73a8 8 0 0 1-.821-.87zm2.004-.45c.316.084.62.184.912.299l-.219.976a7 7 0 0 0-.985-.299zm2.044-.134c.45.03.896.09 1.34.182l-.162.987a7 7 0 0 0-.98-.073zm.18 4.298a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h2.5V8a.5.5 0 0 0-1 0z"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Real-time milestone tracking:</strong> Online project dashboard updates instantly based on active construction stages.
+              </div>
+            </li>
+            <li class="mb-3 d-flex align-items-start gap-3">
+              <div class="flex-shrink-0 mt-1" style="color: var(--accent);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                  <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59a.25.25 0 0 0 .192.41zm10.5-6a5.002 5.002 0 0 0-9.757 2.182.5.5 0 1 1-.771.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Flexible spatial layouts:</strong> Choose custom kitchen cabinetry, bathroom designs, or open-plan living.
+              </div>
+            </li>
+            <li class="mb-3 d-flex align-items-start gap-3">
+              <div class="flex-shrink-0 mt-1" style="color: var(--accent);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+                  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
+                  <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Secure payments:</strong> Easy online invoices, milestone stage gates, and transparent billing.
+              </div>
+            </li>
+          </ul>
+          <a href="booking.html" class="btn-premium-primary">Book Design Consultation</a>
+        </div>
+        <div class="col-lg-6 reveal-right">
+          <!-- Calendar Interface Teaser -->
+          <div class="glass-card bg-opacity-10" style="border: 1.5px solid var(--border-color);">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h3 class="h5 mb-0 d-flex align-items-center gap-2" style="font-weight: 500;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="var(--accent)" class="bi bi-calendar3" viewBox="0 0 16 16">
+                  <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>
+                  <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 0 0 0 2M3 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                </svg>
+                Showroom Booking Status
+              </h3>
+              <span class="badge bg-success">Live Status</span>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small text-muted">Select Target Date</label>
+              <input type="date" class="form-control rounded-3" value="2026-10-12" disabled>
+            </div>
+            <div class="list-group list-group-flush">
+              <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center px-0 py-2 border-secondary border-opacity-25" style="font-size: 0.9rem;">
+                <span>Design Studio Site-Visit</span>
+                <span class="text-success small">● Available</span>
+              </div>
+              <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center px-0 py-2 border-secondary border-opacity-25" style="font-size: 0.9rem; opacity:0.6;">
+                <span>Technical Engineering Audit</span>
+                <span class="text-danger small">● Booked</span>
+              </div>
+              <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center px-0 py-2 border-0" style="font-size: 0.9rem;">
+                <span>Material Board Selection</span>
+                <span class="text-success small">● Available</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Interior Fit-Out Theme Section
+       ========================================================================== */ -->
+  <section class="bg-light-subtle">
+    <div class="container">
+      <div class="row align-items-center mb-5 reveal">
+        <div class="col-md-6 text-start">
+          <span class="section-tag">02 / INTERIORS</span>
+          <h2 class="section-title">Bespoke Interior Fit-Out Themes</h2>
+        </div>
+        <div class="col-md-6 text-md-end text-start">
+          <p class="mb-0 text-muted">Guild & Gable offers structured design themes designed to bring your dream home layouts, colors, and textures to life.</p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- Card 1 -->
+        <div class="col-md-6 col-xl-3 reveal">
+          <div class="glass-card p-0 overflow-hidden h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div style="width: 100%; aspect-ratio: 1 / 1; background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDo8xa0YW0g3VFlIek0VQtL4O3rOlMneZKyXC9ZkYNyAvUXs7Xe4uWYj3J&s=10') center/cover no-repeat;"></div>
+              <div class="p-4">
+                <span class="badge mb-3 bg-secondary text-dark">Tier 1</span>
+                <h3 class="h5 mb-3" style="font-weight: 500;">Classic Traditional</h3>
+                <p class="small text-muted mb-0">Elegant millwork maps, standard wood crown moldings, welcoming entry foyers, and warm ambient lighting.</p>
+              </div>
+            </div>
+            <div class="px-4 pb-4">
+              <a href="service-details.html?type=design&level=classic" class="btn-premium-outline w-100 justify-content-center">View Pricing</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-md-6 col-xl-3 reveal">
+          <div class="glass-card p-0 overflow-hidden h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div style="width: 100%; aspect-ratio: 1 / 1; background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3HdzrOxIexGsITG7tR4vtiqWCt4JgSeELYW3MWYrxe94UAndQd863JTdj&s=10') center/cover no-repeat;"></div>
+              <div class="p-4">
+                <span class="badge mb-3 bg-primary text-white">Tier 2</span>
+                <h3 class="h5 mb-3" style="font-weight: 500;">Boho-Chic Sanctuary</h3>
+                <p class="small text-muted mb-0">Natural rattan furnishings, textured plaster wall finishes, light oak wood centerpieces, and cozy conversation pits.</p>
+              </div>
+            </div>
+            <div class="px-4 pb-4">
+              <a href="service-details.html?type=design&level=boho" class="btn-premium-outline w-100 justify-content-center">View Pricing</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-md-6 col-xl-3 reveal">
+          <div class="glass-card p-0 overflow-hidden h-100 d-flex flex-column justify-content-between" style="border-color: rgba(212,175,55,0.4);">
+            <div>
+              <div style="width: 100%; aspect-ratio: 1 / 1; background: url('https://glledus.com/cdn/shop/files/led-strip-light-ip65-kitchen-island-under-cabinet-linear-lighting.jpg?v=1773773677&width=1300') center/cover no-repeat;"></div>
+              <div class="p-4">
+                <span class="badge mb-3 text-dark" style="background: var(--accent);">Tier 3</span>
+                <h3 class="h5 mb-3" style="font-weight: 500;">Modern Minimalist</h3>
+                <p class="small text-muted mb-0">Sleek marble surfaces, integrated linear LED strip lighting, custom handleless cabinetry, and structural glass walls.</p>
+              </div>
+            </div>
+            <div class="px-4 pb-4">
+              <a href="service-details.html?type=design&level=minimal" class="btn-premium-outline w-100 justify-content-center">View Pricing</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-md-6 col-xl-3 reveal">
+          <div class="glass-card p-0 overflow-hidden h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div style="width: 100%; aspect-ratio: 1 / 1; background: url('https://soundinnovators.in/wp-content/uploads/2024/07/The-Power-of-Home-Automation.--1024x574.webp') center/cover no-repeat;"></div>
+              <div class="p-4">
+                <span class="badge mb-3 bg-dark text-light">Tier 4</span>
+                <h3 class="h5 mb-3" style="font-weight: 500;">Next Gen Smart Home</h3>
+                <p class="small text-muted mb-0">Voice-controlled smart lighting, integrated spatial audio systems, automated climate zoning, and custom media walls.</p>
+              </div>
+            </div>
+            <div class="px-4 pb-4">
+              <a href="service-details.html?type=design&level=smarthome" class="btn-premium-outline w-100 justify-content-center">View Pricing</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Contracting Specialties Section
+       ========================================================================== */ -->
+  <section>
+    <div class="container">
+      <div class="row align-items-center g-5 flex-lg-row-reverse">
+        <div class="col-lg-6 reveal-right">
+          <span class="section-tag">03 / SPECIALTIES</span>
+          <h2 class="section-title">Master Spatial Contracting Specialties</h2>
+          <p>Treat your house to premium structural engineering. Guild & Gable collaborates with the city's top specialty contractors to provide custom framing, marble tiling, electrical zoning, and smart automation.</p>
+          <ul class="list-unstyled mb-4">
+            <li class="mb-3 d-flex align-items-start gap-3">
+              <div class="flex-shrink-0 mt-1" style="color: var(--accent);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-egg-fried" viewBox="0 0 16 16">
+                  <path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                  <path d="M13.997 5.17a5 5 0 0 0-8.101-4.09A5 5 0 0 0 1.28 9.342a5 5 0 0 0 8.336 5.109 3.5 3.5 0 0 0 5.201-4.065 3.001 3.001 0 0 0-.822-5.216zm-1-.034a1 1 0 0 0 .668.977 2.001 2.001 0 0 1 .547 3.478 1 1 0 0 0-.341 1.113 2.5 2.5 0 0 1-3.715 2.905 1 1 0 0 0-1.262.152 4 4 0 0 1-6.67-4.087 1 1 0 0 0-.2-1 4 4 0 0 1 3.693-6.61 1 1 0 0 0 .8-.2 4 4 0 0 1 6.48 3.273z"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Cabinetry customization:</strong> Modify dimensions, finishes, and hardware based on layout.
+              </div>
+            </li>
+            <li class="mb-3 d-flex align-items-start gap-3">
+              <div class="flex-shrink-0 mt-1" style="color: var(--accent);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cup-straw" viewBox="0 0 16 16">
+                  <path d="M13.902.334a.5.5 0 0 1-.28.65l-2.254.902-.4 1.995c-.076.38-.135.792-.178 1.218h1.21a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1.33c-.027.426-.048.835-.062 1.218h1.392a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1.424c.005.18.006.35.006.5 0 4.14-2.24 7.5-5 7.5s-5-3.36-5-7.5c0-.15.001-.32.006-.5H.5a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h1.392c-.014-.383-.035-.792-.062-1.218H.5a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h1.21c-.043-.426-.102-.838-.178-1.218l-.4-1.995L.38.985a.5.5 0 0 1 .93-.37l2.254.902h8.072l2.254-.902a.5.5 0 0 1 .65.28zM3.75 5.016c.07.34.14.693.208 1.054h8.084c.068-.36.138-.713.208-1.054H3.75zM3.456 7.28c.017.344.037.697.06 1.054h8.968c.023-.357.043-.71.06-1.054H3.456zm-.03 2.108c.002.138.003.272.003.4 0 3.32 1.7 6 4 6s4-2.68 4-6c0-.128.001-.262.003-.4H3.426z"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Master craftsmen:</strong> Fully licensed carpenters and stone masons at your disposal.
+              </div>
+            </li>
+            <li class="mb-3 d-flex align-items-start gap-3">
+              <div class="flex-shrink-0 mt-1" style="color: var(--accent);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                  <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>
+                  <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Technical consultations:</strong> Schedule private site inspections prior to structural execution.
+              </div>
+            </li>
+          </ul>
+          <a href="service-details.html?type=contracting" class="btn-premium-primary">View Contracting Packages</a>
+        </div>
+        <div class="col-lg-6 reveal-left">
+          <div class="glass-card bg-opacity-10" style="border: 1.5px solid var(--border-color);">
+            <h3 class="h5 mb-3 d-flex align-items-center gap-2" style="font-weight: 500;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="var(--accent)" class="bi bi-calendar3" viewBox="0 0 16 16">
+                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>
+                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+              </svg>
+              Showroom Showcase & Consulting Schedule
+            </h3>
+            <div class="table-responsive">
+              <table class="table table-sm table-hover mb-0" style="font-size: 0.9rem;">
+                <thead>
+                  <tr>
+                    <th> ID</th>
+                    <th>Fit-Out Specialty</th>
+                    <th>Required Staff</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>481</td>
+                    <td>Marble Tile Slab Installation</td>
+                    <td>Senior Mason</td>
+                    <td><span class="text-success small">Available</span></td>
+                  </tr>
+                  <tr>
+                    <td>482</td>
+                    <td>Custom Wainscoting & Crown Molding</td>
+                    <td>Lead Carpenter</td>
+                    <td><span class="text-danger small">Fully Booked</span></td>
+                  </tr>
+                  <tr>
+                    <td>483</td>
+                    <td>Smart HVAC & Lighting Integration</td>
+                    <td>Systems Engineer</td>
+                    <td><span class="text-success small">Available</span></td>
+                  </tr>
+                  <tr>
+                    <td>484</td>
+                    <td>Double-Height Ceiling Framing</td>
+                    <td>Structural Engineer</td>
+                    <td><span class="text-warning small">Limited Slots</span></td>
+                  </tr>
+                  <tr>
+                    <td>485</td>
+                    <td>Custom Kitchen Cabinetry Fitting</td>
+                    <td>Master Cabinetmaker</td>
+                    <td><span class="text-success small">Available</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Footer Section
+       ========================================================================== */ -->
+  <footer class="footer-rallyx">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Logo and info -->
+        <div class="col-lg-4 col-md-6">
+          <a class="footer-logo" href="index.html">
+            <div class="brand-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2 19h20v2H2zm10-17L3 9h4v8h10V9h4L12 2zm3 13H9V9h6v6z"/>
+              </svg>
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">Guild & Gable</span>
+              <span class="brand-sub"></span>
+            </div>
+          </a>
+          <p class="footer-desc">A premium home renovation and interior fit-out service built for beautiful residential spaces, custom cabinetry, and high-end room transformations.</p>
+          <div class="footer-socials">
+            <a href="https://facebook.com" class="footer-social-link" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/></svg></a>
+            <a href="https://instagram.com" class="footer-social-link" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04 1.849.222 2.428.42 2.931a3.9 3.9 0 0 0 .923 1.417 3.9 3.9 0 0 0 1.417.923c.51.198 1.09.333 1.942.372C5.555 16 5.827 16 8.001 16c2.172 0 2.44 0 3.297-.04 1.849-.039 2.428-.222 2.931-.42a3.9 3.9 0 0 0 1.417-.923 3.9 3.9 0 0 0 .923-1.417c.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8.001c0-2.172-.01-2.44-.048-3.297-.04-1.849-.222-2.428-.42-2.931a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.197-1.093-.332-1.942-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/></svg></a>
+            <a href="https://twitter.com" class="footer-social-link" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/></svg></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-lg-2 col-md-6">
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="booking.html">Book Consultation</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources -->
+        <div class="col-lg-2 col-md-6">
+          <h4 class="footer-title">Resources</h4>
+          <ul class="footer-links">
+            <li><a href="pricing.html">Pricing Plans</a></li>
+            <li><a href="dashboard.html">Client Portal</a></li>
+            <li><a href="coming-soon.html">Design Planner</a></li>
+            <li><a href="404.html">Support Help</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="col-lg-4 col-md-6 footer-newsletter">
+          <h4 class="footer-title">Join the Guild & Gable Newsletter</h4>
+          <p>Get interior design inspiration, exclusive renovation offers, showroom open house schedules, and expert home remodeling tips.</p>
+          <form class="newsletter-form mt-4" id="newsletterForm">
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="Your email address" required aria-label="Email address">
+              <button class="newsletter-btn" type="submit" aria-label="Subscribe">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16"><path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/></svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="row footer-bottom">
+        <div class="col-md-6 text-start mb-3 mb-md-0">
+          <span>&copy; 2026 Guild & Gable. All rights reserved.</span>
+        </div>
+        <div class="col-md-6 text-md-end text-start">
+          <a href="coming-soon.html" class="me-3">Privacy Policy</a>
+          <a href="coming-soon.html">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" title="Go to top" aria-label="Scroll back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/></svg>
+  </button>
+
+  <!-- Bootstrap 5 Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Core Javascript -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

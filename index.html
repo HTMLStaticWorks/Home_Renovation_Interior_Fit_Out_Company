@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guild & Gable offers premium home renovations, custom interior fit-outs, luxury kitchen and bathroom remodeling, and bespoke carpentry.">
+  <meta name="keywords" content="home renovation, interior fit-out, kitchen remodeling, bathroom renovation, luxury home makeovers, custom cabinetry, spatial design, residential remodeling">
+  <meta name="author" content="Guild & Gable">
+  <title>Guild & Gable — Premium Home Renovation & Fit-Outs</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4AF37'><path d='M2 19h20v2H2zm10-17L3 9h4v8h10V9h4L12 2zm3 13H9V9h6v6z'/></svg>">
+
+  <!-- Google Fonts - Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dark-mode.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+
+  <!-- JSON-LD Structured Data for Local Business -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Guild & Gable Renovations",
+    "image": "assets/images/singles_smash.png",
+    "@id": "https://guildandgable.com/#business",
+    "url": "https://guildandgable.com",
+    "telephone": "+1-555-725-5999",
+    "priceRange": "$$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "102 Celebration Parkway",
+      "addressLocality": "Metropolis",
+      "addressRegion": "NY",
+      "postalCode": "10001",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 40.7128,
+      "longitude": -74.0060
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "08:00",
+      "closes": "23:30"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       Header / Navigation Bar
+       ========================================================================== */ -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-rallyx">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand navbar-brand-logo" href="index.html">
+        <div class="brand-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M2 19h20v2H2zm10-17L3 9h4v8h10V9h4L12 2zm3 13H9V9h6v6z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Guild & Gable</span>
+        </div>
+      </a>
+
+      <!-- Mobile Toggle -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-bar"></span>
+        <span class="navbar-toggler-bar"></span>
+        <span class="navbar-toggler-bar"></span>
+      </button>
+
+      <!-- Navigation Links -->
+      <div class="collapse navbar-collapse navbar-collapse-mobile" id="mainNavbar">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu border-0 shadow-sm glass-card p-2">
+              <li><a class="dropdown-item rounded-3 py-2 active" href="index.html">Home</a></li>
+              <li><a class="dropdown-item rounded-3 py-2" href="home-2.html">Home 2</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="dashboard.html">Dashboard</a>
+          </li>
+        </ul>
+
+        <!-- Right Side Utility Controls & CTAs -->
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <!-- RTL Switcher -->
+          <button class="utility-btn font-monospace" id="rtl-toggle" title="Toggle Text Direction" aria-label="Toggle RTL direction">RTL</button>
+          
+          <!-- Theme Toggle -->
+          <button class="utility-btn" id="theme-toggle" title="Toggle Light/Dark Mode" aria-label="Toggle dark mode">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-moon-fill" viewBox="0 0 16 16">
+              <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.277 7.277a7.21 7.21 0 0 0 3.46-.878.767.767 0 0 1 .858.08.77.767 0 0 1 .08.858 7.211 7.211 0 0 1-7.602 4.168 7.272 7.272 0 0 1-5.677-5.677 7.27 7.27 0 0 1 4.169-7.601z"/>
+            </svg>
+          </button>
+
+          <!-- Login (Secondary CTA) -->
+          <a href="login.html" class="btn-premium-primary">Login</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       Hero Section
+       ========================================================================== */ -->
+  <section class="hero-classic">
+    <div class="hero-classic-overlay"></div>
+    <div class="container hero-classic-content">
+      <div class="row align-items-center py-5" style="min-height: calc(100vh - var(--header-height));">
+        <div class="col-lg-7 text-center text-lg-start reveal-left active">
+          <span class="section-tag">Welcome to Guild & Gable</span>
+          <h1 class="headline">Exquisite Spaces.<br>Masterful Craft.<br>Become <span>Unforgettable.</span></h1>
+          <p class="desc mb-5 mx-auto ms-lg-0">Experience Metropolis' premier luxury home renovations. Grand design makeovers, bespoke fit-out packages, professional craftsmanship, and dedicated design planners.</p>
+          <div class="d-grid d-sm-flex gap-3 justify-content-center justify-content-lg-start">
+            <a href="booking.html" class="btn-premium-primary py-3 px-4 pulse-button justify-content-center">Book Design  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg></a>
+            <a href="services.html" class="btn-premium-secondary py-3 px-4 justify-content-center">Explore Galleries</a>
+          </div>
+        </div>
+        <div class="col-lg-5 hero-classic-img-col mt-5 mt-lg-0 reveal-right active">
+          <!-- Hero Image Frame -->
+          <div class="hero-classic-img-frame">
+            <img src="https://www.customfurnish.com/blogs/wp-content/uploads/2025/02/Living_-3-3.webp" alt="Guild & Gable — Luxury Living Room Renovation" loading="eager">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Why Choose Guild & Gable
+       ========================================================================== */ -->
+  <section class="bg-light-subtle">
+    <div class="container">
+      <!-- Why Choose Us Header -->
+      <div class="row text-center mb-5 justify-content-center reveal">
+        <div class="col-lg-6">
+          <span class="section-tag">Why Choose Us</span>
+          <h2 class="section-title mx-auto">Elevating Renovations to Luxury Standards</h2>
+          <p class="lead">Built from the ground up to support exquisite spatial design, premium structural engineering, and stunning custom finishes.</p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- Feature 1 -->
+        <div class="col-lg-4 reveal">
+          <div class="glass-card p-0 overflow-hidden h-100 text-center d-flex flex-column justify-content-between">
+            <div>
+              <div class="why-choose-us-img" style="background-image: url('https://smartechonline.com/wp-content/uploads/2022/07/Top-4-Commercial-Uses-of-Acoustic-Insulation.jpg');"></div>
+              <div class="px-4">
+                <h3 class="h4 mb-3" style="font-weight:600;">Acoustic & Thermal Comfort</h3>
+                <p>Our walls feature state-of-the-art insulation and acoustic paneling to support crystal clear peace, privacy, and climate comfort.</p>
+              </div>
+            </div>
+            <div class="pb-4"></div>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="col-lg-4 reveal">
+          <div class="glass-card p-0 overflow-hidden h-100 text-center d-flex flex-column justify-content-between">
+            <div>
+              <div class="why-choose-us-img" style="background-image: url('https://images.squarespace-cdn.com/content/v1/619638b22bd9f72d5ddde29f/0c1bd579-7284-4880-a46f-168d17fe3791/custom-design-construction-home-renovation-about-planning-process.jpg');"></div>
+              <div class="px-4">
+                <h3 class="h4 mb-3" style="font-weight:600;">Bespoke Design & Planning</h3>
+                <p>Design the home of your dreams under the direct guidance of certified interior designers and structural specialists in Metropolis.</p>
+              </div>
+            </div>
+            <div class="pb-4"></div>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="col-lg-4 reveal">
+          <div class="glass-card p-0 overflow-hidden h-100 text-center d-flex flex-column justify-content-between">
+            <div>
+              <div class="why-choose-us-img" style="background-image: url('https://www.zoomforth.com/assets/img/blog/client-portal-software.jpg');"></div>
+              <div class="px-4">
+                <h3 class="h4 mb-3" style="font-weight:600;">Digital Client Portal</h3>
+                <p>Check project milestones online, select premium construction materials, and approve design modifications in your dashboard without calling.</p>
+              </div>
+            </div>
+            <div class="pb-4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Premium Renovation Galleries
+       ========================================================================== */ -->
+  <section>
+    <div class="container">
+      <div class="row align-items-center mb-5 reveal">
+        <div class="col-md-6 text-center text-md-start">
+          <span class="section-tag">Bespoke Galleries</span>
+          <h2 class="section-title">Projects Tailored to Your Lifestyle</h2>
+        </div>
+        <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+          <p class="mb-0">Whether you are planning a full-home architectural extension, an integrated kitchen remodel, or a boutique room transformation, our builders deliver.</p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-6 reveal-left">
+          <div class="glass-card p-0 overflow-hidden border-0 shadow-lg h-100 d-flex flex-column">
+            <!-- Facility Image -->
+            <div class="position-relative overflow-hidden" style="height: 350px; background: url('https://togetherdesignbuild.com/wp-content/uploads/2025/02/tips-for-hiring-a-home-remodel-contractor.png') center/cover no-repeat;">
+              <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,0.65);"></div>
+              <div class="position-absolute top-50 start-50 translate-middle text-white text-center w-100" style="z-index: 2;">
+                <h4 style="font-weight: 550; color: #FDFBF7;">Residential Renovation & Additions</h4>
+                <p class="small text-white-50 mb-0" style="letter-spacing: 0.3px;">Scale: Full-Home Redesigns | 12,000+ Sq Ft Renovated</p>
+              </div>
+            </div>
+            <div class="p-4 bg-body-tertiary flex-grow-1">
+              <h3 class="h4 mb-3" style="font-weight:500;">Luxury Additions & Extensions</h3>
+              <p class="mb-0">Built strictly according to premium engineering standards. Accommodates custom steel beams, open floor plan designs, double-height ceiling clearings, architectural moldings, and VIP living spaces.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal-right">
+          <div class="glass-card p-0 overflow-hidden border-0 shadow-lg h-100 d-flex flex-column">
+            <!-- Facility Image -->
+            <div class="position-relative overflow-hidden" style="height: 350px; background: url('https://images.livspace-cdn.com/w:3840/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/ond-1634120396-Obfdc/di-2026-1769081758-Ayx2Q/amj-1774778677-BA1IA/kitchen-1774787055-IgYRk/16-1782107420-jB2w9.png') center/cover no-repeat;">
+              <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,0.65);"></div>
+              <div class="position-absolute top-50 start-50 translate-middle text-white text-center w-100" style="z-index: 2;">
+                <h4 style="font-weight: 550; color: #FDFBF7;">Bespoke Kitchen & Bathroom Fit-Outs</h4>
+                <p class="small text-white-50 mb-0" style="letter-spacing: 0.3px;">Scale: Spatial Transformations | 6,000+ Sq Ft Transformed</p>
+              </div>
+            </div>
+            <div class="p-4 bg-body-tertiary flex-grow-1">
+              <h3 class="h4 mb-3" style="font-weight:500;">Premium Interior Renovations</h3>
+              <p class="mb-0">Designed primarily for functional elegance, smart kitchen spaces, custom master bathrooms, luxury millwork, and custom walk-in wardrobes. Fully integrated with smart HVAC and automated ambient lighting.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Curated Interior Styles
+       ========================================================================== */ -->
+  <section class="bg-light-subtle">
+    <div class="container">
+      <div class="row text-center mb-5 justify-content-center reveal">
+        <div class="col-lg-6">
+          <span class="section-tag">Interior Styles</span>
+          <h2 class="section-title mx-auto">Curated Interior Design Themes</h2>
+          <p>Choose from our beautifully curated design styles, tailored to complement your home's unique layout and character.</p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- Card 1 -->
+        <div class="col-lg-3 col-md-6 reveal">
+          <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <span class="badge mb-3 bg-secondary text-dark" style="font-weight: 500;">Timeless Craft</span>
+              <h3 class="h5 mb-3" style="font-weight:500;">Classic Traditional</h3>
+              <p class="small text-muted mb-4">Elegant wainscoting panels, premium oak flooring, classic marble countertops, and warm ambient brass light fixtures.</p>
+            </div>
+            <a href="service-details.html?package=classic" class="btn-premium-outline w-100 justify-content-center">Learn More</a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-lg-3 col-md-6 reveal">
+          <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <span class="badge mb-3 bg-primary text-white" style="font-weight: 500;">Boutique Choice</span>
+              <h3 class="h5 mb-3" style="font-weight:500;">Modern Boho-Chic</h3>
+              <p class="small text-muted mb-4">Natural oak woodwork, custom rattan cabinets, organic linen panels, and warm sandy-beige plaster finishes.</p>
+            </div>
+            <a href="service-details.html?package=boho" class="btn-premium-outline w-100 justify-content-center">Learn More</a>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-lg-3 col-md-6 reveal">
+          <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <span class="badge mb-3 text-dark" style="background: var(--accent); font-weight: 500;">High-End Luxury</span>
+              <h3 class="h5 mb-3" style="font-weight:500;">Luxury Modern Estate</h3>
+              <p class="small text-muted mb-4">Cascading Calacatta marble counters, brushed champagne gold trims, custom architectural LED channels, and premium oak millwork.</p>
+            </div>
+            <a href="service-details.html?package=royal" class="btn-premium-outline w-100 justify-content-center">Learn More</a>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-lg-3 col-md-6 reveal">
+          <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <span class="badge mb-3 bg-dark text-light" style="font-weight: 500;">Smart Minimalism</span>
+              <h3 class="h5 mb-3" style="font-weight:500;">Sleek Contemporary</h3>
+              <p class="small text-muted mb-4">Matte black facades, seamless push-to-open cabinets, smart home automated integration, and concrete micro-cement flooring.</p>
+            </div>
+            <a href="service-details.html?package=nextgen" class="btn-premium-outline w-100 justify-content-center">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Craftsmen & Engineering Specialists
+       ========================================================================== */ -->
+  <section>
+    <div class="container">
+      <div class="row align-items-center mb-5 reveal">
+        <div class="col-md-6 text-center text-md-start">
+          <span class="section-tag">Engineering Art</span>
+          <h2 class="section-title">Professional Contracting Guild</h2>
+        </div>
+        <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+          <p class="mb-0">We partner with the city's finest architectural craftsmen and engineering specialists to execute premium finishes at standard-setting quality.</p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- Catering Partners Grid -->
+        <div class="col-lg-8 reveal-left">
+          <div class="glass-card p-4">
+            <h3 class="h5 mb-4" style="font-weight:500;">🏗️ Premium Construction Specialties</h3>
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">Specialist</th>
+                    <th scope="col">Trade Focus</th>
+                    <th scope="col">Key Deliverables</th>
+                    <th scope="col">Quality Tier</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong class="text-primary">Master Carpentry Guild</strong></td>
+                    <td>Millwork & Cabinetry</td>
+                    <td>Bespoke Vanities & Kitchen Panels</td>
+                    <td><span class="badge bg-opacity-10 bg-primary text-primary">Ultra-Premium</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong class="text-primary">Stone & Marble Specialists</strong></td>
+                    <td>Slabs & Masonry</td>
+                    <td>Calacatta Counters & Walk-in Showers</td>
+                    <td><span class="badge bg-opacity-10 bg-primary text-primary">Ultra-Premium</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong class="text-primary">Mechanical & Electrical Guild</strong></td>
+                    <td>Home Systems & HVAC</td>
+                    <td>Smart Lighting & Climate Zones</td>
+                    <td><span class="badge bg-opacity-10 bg-primary text-primary">Premium Integration</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Surface Finishes & Paint</strong></td>
+                    <td>Textured Surfaces</td>
+                    <td>Venetian Plaster & Micro-Cement</td>
+                    <td><span class="badge bg-opacity-10 bg-secondary text-secondary">Premium Finish</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Call to Registration / Open House -->
+        <div class="col-lg-4 reveal-right">
+          <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between bg-primary text-white" style="background: linear-gradient(135deg, var(--primary) 0%, #D4AF37 100%) !important;">
+            <div>
+              <span class="badge mb-3 text-dark bg-warning" style="font-weight: 500;">Next Showcase Event</span>
+              <h3 class="h4 text-white mb-3" style="font-weight:500;">Guild Renovation Open House</h3>
+              <p class="text-white-50 small mb-4">Registration closes in exactly 4 days. Tour our latest completed residential villa, feel premium wood textures, and discuss your floor plan with engineers.</p>
+              <ul class="list-unstyled text-white-50 small mb-4">
+                <li class="mb-2">📅 <strong>Date:</strong> July 12-14, 2026</li>
+                <li class="mb-2">📍 <strong>Venue:</strong> Guild & Gable Showroom</li>
+                <li>🏅 <strong>Organized by:</strong> Guild & Gable Design Team</li>
+              </ul>
+            </div>
+            <a href="service-details.html?type=showcase" class="btn-premium-secondary w-100 justify-content-center">Register For Open House <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Client Testimonials
+       ========================================================================== */ -->
+  <section class="bg-light-subtle">
+    <div class="container">
+      <div class="row text-center mb-5 justify-content-center reveal">
+        <div class="col-lg-6">
+          <span class="section-tag">Client Feedback</span>
+          <h2 class="section-title mx-auto">What Our Clients Say About Guild & Gable</h2>
+        </div>
+      </div>
+
+      <div class="row g-4 align-items-stretch">
+        <!-- Review 1 -->
+        <div class="col-md-6 reveal">
+          <div class="glass-card testimonial-card h-100">
+            <!-- Star Rating -->
+            <div class="d-flex gap-1 mb-3" style="color: #FBBF24;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+            </div>
+            <p class="testimonial-quote mb-4">"The digital client portal is exceptionally simple to operate. I can check construction milestones, review material selections, and approve design changes directly in my dashboard. The custom cabinetry and oak finishes are premium."</p>
+            <div class="d-flex align-items-center gap-3">
+              <img src="assets/images/avatar_timothy.png" alt="Timothy Lawson" class="testimonial-avatar" style="object-fit: cover;">
+              <div>
+                <h4 class="h6 mb-0" style="font-weight:600;">Timothy Lawson</h4>
+                <small class="text-muted">Homeowner Client since 2024</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="col-md-6 reveal">
+          <div class="glass-card testimonial-card h-100">
+            <!-- Star Rating -->
+            <div class="d-flex gap-1 mb-3" style="color: #FBBF24;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
+            </div>
+            <p class="testimonial-quote mb-4">"Our kitchen and spatial remodeling project was a major success. The project coordinator managed the material selections and mechanical tie-ups flawlessly. We loved the luxury modern finishes and layout."</p>
+            <div class="d-flex align-items-center gap-3">
+              <img src="assets/images/avatar_kristina.png" alt="Kristina Wagner" class="testimonial-avatar" style="object-fit: cover;">
+              <div>
+                <h4 class="h6 mb-0" style="font-weight:600;">Kristina Wagner</h4>
+                <small class="text-muted">Residential Renovation Client</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Final Booking CTA
+       ========================================================================== */ -->
+  <section class="position-relative overflow-hidden bg-primary text-white" style="background: radial-gradient(circle at 80% 20%, rgba(212,175,55,0.15), var(--primary) 60%) !important; padding: 120px 0;">
+    <div class="container text-center reveal">
+      <span class="section-tag" style="color: var(--accent);">Plan Your Transformation</span>
+      <h2 class="text-white mb-4 mx-auto" style="max-width: 700px;">Schedule Your Design Consultation Today</h2>
+      <p class="text-white-50 mb-5 mx-auto" style="max-width: 600px;">Consult Metropolis' most sought-after residential architects and builders. Select custom finishes, map out your floor plans, and estimate your project budget online.</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="booking.html" class="btn-premium-secondary py-3 px-5">Book Consultation <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-event-fill me-2" viewBox="0 0 16 16"><path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM8.5 8.5a.5.5 0 0 1 .8-.4l.9.9 2.4-2.4a.5.5 0 0 1 .7.7L10.5 10a.5.5 0 0 1-.7 0z"/></svg></a>
+        <a href="contact.html" class="btn-premium-outline py-3 px-5 btn-home1-contrast">Consult an Engineer</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Footer Section
+       ========================================================================== */ -->
+  <footer class="footer-rallyx">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Logo and info -->
+        <div class="col-lg-4 col-md-6">
+          <a class="footer-logo" href="index.html">
+            <div class="brand-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2 19h20v2H2zm10-17L3 9h4v8h10V9h4L12 2zm3 13H9V9h6v6z"/>
+              </svg>
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">Guild & Gable</span>
+            </div>
+          </a>
+          <p class="footer-desc">A premium home renovation and interior fit-out service built for beautiful residential spaces, custom cabinetry, and high-end room transformations.</p>
+          <div class="footer-socials">
+            <a href="https://facebook.com" class="footer-social-link" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/></svg></a>
+            <a href="https://instagram.com" class="footer-social-link" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04 1.849.222 2.428.42 2.931a3.9 3.9 0 0 0 .923 1.417 3.9 3.9 0 0 0 1.417.923c.51.198 1.09.333 1.942.372C5.555 16 5.827 16 8.001 16c2.172 0 2.44 0 3.297-.04 1.849-.039 2.428-.222 2.931-.42a3.9 3.9 0 0 0 1.417-.923 3.9 3.9 0 0 0 .923-1.417c.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8.001c0-2.172-.01-2.44-.048-3.297-.04-1.849-.222-2.428-.42-2.931a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.197-1.093-.332-1.942-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/></svg></a>
+            <a href="https://twitter.com" class="footer-social-link" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/></svg></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-lg-2 col-md-6">
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="booking.html">Book Consultation</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources -->
+        <div class="col-lg-2 col-md-6">
+          <h4 class="footer-title">Resources</h4>
+          <ul class="footer-links">
+            <li><a href="pricing.html">Pricing Plans</a></li>
+            <li><a href="dashboard.html">Client Portal</a></li>
+            <li><a href="coming-soon.html">Design Planner</a></li>
+            <li><a href="404.html">Support Help</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="col-lg-4 col-md-6 footer-newsletter">
+          <h4 class="footer-title">Join the Guild & Gable Newsletter</h4>
+          <p>Get interior design inspiration, exclusive renovation offers, showroom open house schedules, and expert home remodeling tips.</p>
+          <form class="newsletter-form mt-4" id="newsletterForm">
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="Your email address" required aria-label="Email address">
+              <button class="newsletter-btn" type="submit" aria-label="Subscribe">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16"><path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/></svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="row footer-bottom">
+        <div class="col-md-6 text-start mb-3 mb-md-0">
+          <span>&copy; 2026 Guild & Gable. All rights reserved.</span>
+        </div>
+        <div class="col-md-6 text-md-end text-start">
+          <a href="coming-soon.html" class="me-3">Privacy Policy</a>
+          <a href="coming-soon.html">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top button -->
+  <button class="back-to-top" id="backToTop" title="Go to top" aria-label="Scroll back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/></svg>
+  </button>
+
+  <!-- Bootstrap 5 Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Core Javascript -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

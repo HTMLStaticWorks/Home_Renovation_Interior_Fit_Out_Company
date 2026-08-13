@@ -1,0 +1,230 @@
+/* ==========================================================================
+   RALLYX - Dark Mode Stylesheet
+   ========================================================================== */
+
+/* Overrides root variables when dark-mode class is active on body */
+body.dark-mode, [data-bs-theme="dark"] {
+  --bg-main: #081C15;          /* Deep Forest Emerald Black */
+  --bg-card: rgba(27, 67, 50, 0.7);
+  --bg-navbar: rgba(8, 28, 21, 0.85);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --text-main: #FAF9F6;        /* Soft Alabaster White */
+  --text-muted: #9DB5A7;       /* Muted Sage Gray */
+  --accent: #52B788;           /* Vibrant Mint Green */
+  --accent-rgb: 82, 183, 136;
+  --electric-blue: #95D5B2;    /* Soft Sage Green Glow */
+  --electric-blue-rgb: 149, 213, 178;
+  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(82, 183, 136, 0.06);
+  
+  /* Brighten text colors slightly for high contrast */
+  color-scheme: dark;
+}
+
+/* Specific Dark Mode Enhancements */
+body.dark-mode .navbar-rallyx {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+body.dark-mode .glass-card {
+  background: rgba(15, 23, 42, 0.6);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .glass-card:hover {
+  background: rgba(15, 23, 42, 0.8);
+  border-color: rgba(82, 183, 136, 0.3); /* Green glow on hover */
+  box-shadow: 0 20px 40px rgba(82, 183, 136, 0.05);
+}
+
+/* Forms styling in Dark Mode */
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+  background-color: rgba(15, 23, 42, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus {
+  background-color: rgba(15, 23, 42, 0.95);
+  border-color: var(--accent);
+  color: var(--text-main);
+}
+
+/* Tables and Calendars in Dark Mode */
+body.dark-mode .table {
+  color: var(--text-main);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+body.dark-mode .table-hover tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+  color: var(--text-main);
+}
+
+/* Calendar Date Selector overrides */
+body.dark-mode .calendar-day {
+  background: rgba(27, 67, 50, 0.5);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .calendar-day.active {
+  background: var(--accent);
+  color: #081C15;
+}
+
+body.dark-mode .calendar-day.disabled {
+  background: rgba(27, 67, 50, 0.2);
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* Custom cards or labels override */
+body.dark-mode .slot-card.booked {
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.3);
+  border-color: transparent;
+}
+
+body.dark-mode .slot-card.available {
+  background: rgba(82, 183, 136, 0.05);
+  border-color: rgba(82, 183, 136, 0.2);
+  color: var(--text-main);
+}
+
+body.dark-mode .slot-card.selected {
+  background: var(--accent);
+  color: #081C15;
+  border-color: var(--accent);
+}
+
+/* Modal and Offcanvas adjustments */
+body.dark-mode .modal-content,
+body.dark-mode .offcanvas {
+  background-color: #081C15;
+  border-color: rgba(255, 255, 255, 0.06);
+  color: var(--text-main);
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Breadcrumbs override */
+body.dark-mode .breadcrumb-item.active {
+  color: var(--accent);
+}
+
+/* Tab controls override */
+body.dark-mode .nav-tabs {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+body.dark-mode .nav-tabs .nav-link.active {
+  background-color: var(--bg-main);
+  border-color: rgba(255, 255, 255, 0.06) rgba(255, 255, 255, 0.06) transparent;
+  color: var(--accent);
+}
+
+/* Scrollbar styling in dark mode */
+body.dark-mode::-webkit-scrollbar-track {
+  background: #081C15;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border: 3px solid #081C15;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================================================
+   Dashboard Sidebar — Dark Mode
+   ========================================================================== */
+body.dark-mode .dashboard-sidebar {
+  background: var(--bg-navbar);         /* Matches dark navbar */
+  border-right-color: rgba(255, 255, 255, 0.06);
+  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .dashboard-sidebar .dashboard-sidebar-link {
+  color: rgba(248, 250, 252, 0.55);
+}
+
+body.dark-mode .dashboard-sidebar .dashboard-sidebar-link:hover,
+body.dark-mode .dashboard-sidebar .dashboard-sidebar-link.active {
+  color: var(--accent);
+  background: rgba(82, 183, 136, 0.06);
+  border-left-color: var(--accent);
+}
+
+body.dark-mode .dashboard-sidebar .dashboard-sidebar-link.active {
+  background: rgba(82, 183, 136, 0.08);
+  font-weight: 600;
+}
+
+/* Ensure text-muted matches custom theme variable in dark mode for WCAG AA compliance */
+body.dark-mode .text-muted,
+[data-bs-theme="dark"] .text-muted {
+  color: var(--text-muted) !important;
+}
+
+/* Dark Mode Overrides for Navigation and Buttons */
+body.dark-mode .navbar-rallyx .nav-link:hover,
+body.dark-mode .navbar-rallyx .nav-link.active {
+  color: var(--accent);
+}
+
+body.dark-mode .btn-premium-primary:hover,
+body.dark-mode .btn-premium-outline:hover {
+  color: #081C15 !important;
+}
+
+body.dark-mode .navbar-rallyx .dropdown-menu .dropdown-item {
+  color: var(--text-main);
+}
+
+body.dark-mode .navbar-rallyx .dropdown-menu .dropdown-item:hover {
+  background: rgba(82, 183, 136, 0.1);
+  color: var(--accent);
+}
+
+body.dark-mode .navbar-rallyx .dropdown-menu .dropdown-item.active {
+  background: var(--accent);
+  color: #081C15;
+}
+
+/* Dark Mode Hero Overlays contrast corrections */
+body.dark-mode .hero-classic-overlay,
+body.dark-mode .page-hero-overlay {
+  background: linear-gradient(90deg, 
+    rgba(8, 28, 21, 0.9) 0%, 
+    rgba(8, 28, 21, 0.45) 60%, 
+    rgba(8, 28, 21, 0.15) 100%
+  ) !important;
+}
+
+body.dark-mode.home-2-page .hero-luxury-overlay {
+  background: linear-gradient(180deg, 
+    rgba(8, 28, 21, 0.4) 0%, 
+    rgba(8, 28, 21, 0.8) 100%
+  ) !important;
+}
+
+/* Dark Mode Active Header Link Border */
+body.dark-mode .navbar-rallyx .nav-link.active {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+body.dark-mode .navbar-rallyx .nav-link:hover {
+  color: var(--accent) !important;
+}
+
+/* Green outline border for utility buttons in dark mode */
+body.dark-mode .utility-btn {
+  border: 1.5px solid var(--accent) !important;
+}

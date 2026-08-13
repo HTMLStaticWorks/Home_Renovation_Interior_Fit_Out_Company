@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guild & Gable Client Portal. Manage renovation schedules, review coordinator comments, analyze project charts, and view material selections.">
+  <title>Guild & Gable — Client Control Center</title>
+  
+  <!-- Favicon -->
+  <link class="brand-favicon" rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4AF37'><path d='M2 19h20v2H2zm10-17L3 9h4v8h10V9h4L12 2zm3 13H9V9h6v6z'/></svg>">
+
+  <!-- Google Fonts - Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dark-mode.css">
+  <link rel="stylesheet" href="assets/css/rtl.css">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* Custom inner Dashboard Layout */
+    .dashboard-layout {
+      min-height: 100vh;
+      display: flex;
+    }
+    
+    .dashboard-sidebar {
+      width: 280px;
+      /* Match navbar header background — adapts in light & dark mode */
+      background: var(--bg-navbar);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-right: 1px solid var(--border-color);
+      color: var(--text-main);
+      flex-shrink: 0;
+      transition: var(--transition-smooth);
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      overflow-y: auto;
+      box-shadow: 2px 0 16px rgba(0, 0, 0, 0.06);
+    }
+    
+    .dashboard-content-area {
+      flex-grow: 1;
+      background: var(--bg-main);
+      padding: 2.5rem;
+      overflow-y: auto;
+    }
+    
+    .dashboard-sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.5rem;
+      font-weight: 500;
+      border-left: 3px solid transparent;
+      transition: var(--transition-fast);
+      border-radius: 0 8px 8px 0;
+      margin-right: 0.75rem;
+      margin-bottom: 2px;
+    }
+    
+    /* Desktop Sidebar Links — adaptive to light/dark via CSS vars */
+    .dashboard-sidebar .dashboard-sidebar-link {
+      color: var(--text-muted);
+    }
+    .dashboard-sidebar .dashboard-sidebar-link:hover, 
+    .dashboard-sidebar .dashboard-sidebar-link.active {
+      color: var(--accent);
+      background: rgba(82, 183, 136, 0.07);
+      border-left-color: var(--accent);
+    }
+    .dashboard-sidebar .dashboard-sidebar-link.active {
+      color: var(--accent);
+      background: rgba(82, 183, 136, 0.1);
+      font-weight: 600;
+    }
+
+    /* Offcanvas Sidebar Links */
+    .offcanvas .dashboard-sidebar-link {
+      color: var(--text-muted);
+    }
+    .offcanvas .dashboard-sidebar-link:hover, 
+    .offcanvas .dashboard-sidebar-link.active {
+      color: var(--accent);
+      background: rgba(82, 183, 136, 0.07);
+      border-left-color: var(--accent);
+    }
+    
+    .dashboard-stat-card {
+      border-radius: 16px;
+      padding: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+    
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    @media (max-width: 991.98px) {
+      .dashboard-sidebar {
+        display: none;
+      }
+      .dashboard-layout {
+        display: block;
+      }
+      .dashboard-content-area {
+        padding: 0;
+        overflow-y: unset;
+      }
+      .dashboard-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--bg-main);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        align-items: center;
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      }
+      .dashboard-section {
+        padding: 1.5rem 1rem !important;
+      }
+      #dashboardSectionTitle {
+        font-size: 1.1rem;
+        white-space: nowrap;
+      }
+      .dashboard-header .utility-btn {
+        padding: 0.3rem 0.55rem;
+        font-size: 0.75rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .dashboard-header {
+        padding: 0.5rem 0.75rem !important;
+        gap: 0.25rem !important;
+      }
+      .dashboard-header .utility-btn {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.65rem !important;
+      }
+      .dashboard-header .utility-btn svg {
+        width: 14px !important;
+        height: 14px !important;
+      }
+      .dashboard-profile-panel {
+        padding: 0.2rem !important;
+        gap: 0 !important;
+        border: none !important;
+        background: transparent !important;
+      }
+      .dashboard-profile-avatar {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 0.75rem !important;
+      }
+      .dashboard-profile-caret {
+        display: none !important;
+      }
+      #dashboardSectionTitle {
+        font-size: 0.95rem !important;
+      }
+    }
+
+    /* Table styles */
+    #social-events .table th,
+    #social-events .table td,
+    #venue-booking .table th,
+    #venue-booking .table td {
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 767.98px) {
+      #social-events .glass-card,
+      #venue-booking .glass-card {
+        overflow: visible;
+        padding: 1.25rem;
+      }
+
+      #social-events .h5,
+      #venue-booking .h5 {
+        font-size: 0.95rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <!-- ==========================================================================
+         Fixed Sidebar (Desktop View)
+         ========================================================================== */ -->
+    <aside class="dashboard-sidebar d-none d-lg-flex flex-column py-4">
+      <div>
+        <a class="navbar-brand navbar-brand-logo text-white px-4 mb-5" href="index.html">
+          <div class="brand-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2 19h20v2H2zm10-17L3 9h4v8h10V9h4L12 2zm3 13H9V9h6v6z"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">Guild & Gable</span>
+            <span class="brand-sub"></span>
+          </div>
+        </a>
+
+        <!-- Sidebar Navigation links -->
+        <nav class="nav flex-column mb-4">
+          <a href="#" class="dashboard-sidebar-link active" data-section="overview">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4M3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.39.39 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.39.39 0 0 0-.029-.518z"/><path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.99 7.99 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68.63A7 7 0 0 0 8 3"/></svg>
+            <span>Overview</span>
+          </a>
+          <a href="#" class="dashboard-sidebar-link" data-section="venue-booking">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM8.5 8.5a.5.5 0 0 1 .8-.4l.9.9 2.4-2.4a.5.5 0 0 1 .7.7L10.5 10a.5.5 0 0 1-.7 0z"/></svg>
+            <span>Project Milestones</span>
+          </a>
+          <a href="#" class="dashboard-sidebar-link" data-section="social-events">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33 33 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935M3.504 1c.007.517.026 1.006.056 1.469.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356-.043.01-.056.032L4.002 15h8l-1.216-.912-.056-.032-.043-.01-1.426-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667.03-.463.049-.952.056-1.469z"/></svg>
+            <span>Material Selections</span>
+          </a>
+          <a href="#" class="dashboard-sidebar-link" data-section="planning-progress">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 0h1v15h15v1H0zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07"/></svg>
+            <span>Design & Approvals</span>
+          </a>
+          <a href="#" class="dashboard-sidebar-link" data-section="profile">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/></svg>
+            <span>Profile Settings</span>
+          </a>
+        </nav>
+
+        <div class="px-4 mt-3">
+          <a href="index.html" class="btn-premium-outline w-100 justify-content-center">Log Out</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==========================================================================
+         Offcanvas Sidebar (Mobile View)
+         ========================================================================== */ -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="dashboardSidebarOffcanvas" aria-labelledby="dashboardSidebarOffcanvasLabel">
+      <div class="offcanvas-header py-4 px-4">
+        <a href="index.html" class="offcanvas-title navbar-brand-logo mb-0 text-decoration-none" id="dashboardSidebarOffcanvasLabel">
+          <div class="brand-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2 19h20v2H2zm10-17L3 9h4v8h10V9h4L12 2zm3 13H9V9h6v6z"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">Guild & Gable</span>
+            <span class="brand-sub"></span>
+          </div>
+        </a>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body d-flex flex-column p-0 py-4">
+        <nav class="nav flex-column mb-4">
+          <a href="#" class="dashboard-sidebar-link active" data-section="overview">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4M3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.39.39 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.39.39 0 0 0-.029-.518z"/><path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.99 7.99 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68.63A7 7 0 0 0 8 3"/></svg>
+            <span>Overview</span>
+          </a>
+          <a href="#" class="dashboard-sidebar-link" data-section="venue-booking">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM8.5 8.5a.5.5 0 0 1 .8-.4l.9.9 2.4-2.4a.5.5 0 0 1 .7.7L10.5 10a.5.5 0 0 1-.7 0z"/></svg>
+            <span>Project Milestones</span>
+          </a>
+          <a href="#" class="dashboard-sidebar-link" data-section="social-events">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33 33 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935M3.504 1c.007.517.026 1.006.056 1.469.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356-.043.01-.056.032L4.002 15h8l-1.216-.912-.056-.032-.043-.01-1.426-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667.03-.463.049-.952.056-1.469z"/></svg>
+            <span>Material Selections</span>
+          </a>
+          <a href="#" class="dashboard-sidebar-link" data-section="planning-progress">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 0h1v15h15v1H0zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07"/></svg>
+            <span>Design & Approvals</span>
+          </a>
+          <a href="#" class="dashboard-sidebar-link" data-section="profile">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/></svg>
+            <span>Profile Settings</span>
+          </a>
+        </nav>
+        <div class="px-4 mt-3">
+          <a href="index.html" class="btn-premium-outline w-100 justify-content-center">Log Out</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         Dashboard Main Content Area
+         ========================================================================== */ -->
+    <main class="dashboard-content-area">
+      <!-- Section Header -->
+      <header class="dashboard-header text-start">
+        <div class="d-flex align-items-center gap-3">
+          <!-- Mobile Hamburger Toggle Menu -->
+          <button class="btn btn-outline-secondary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#dashboardSidebarOffcanvas" aria-controls="dashboardSidebarOffcanvas">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/></svg>
+          </button>
+          <div>
+            <h1 class="h3 mb-0" id="dashboardSectionTitle" style="font-weight: 600;">Overview</h1>
+            <p class="mb-0 text-muted small d-none d-md-block mt-1">Hello, Marcus! Welcome to your design & renovation.</p>
+          </div>
+        </div>
+        
+        <!-- Quick Global Settings & User Profile -->
+        <div class="d-flex align-items-center gap-3">
+          <button class="utility-btn font-monospace" id="rtl-toggle" title="Toggle RTL direction">RTL</button>
+          <button class="utility-btn" id="theme-toggle" title="Toggle dark mode">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-moon-fill" viewBox="0 0 16 16"><path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.277 7.277a7.21 7.21 0 0 0 3.46-.878.767.767 0 0 1 .858.08.77 0 0 1 .08.858 7.211 7.211 0 0 1-7.602 4.168 7.272 7.272 0 0 1-5.677-5.677 7.27 7.27 0 0 1 4.169-7.601z"/></svg>
+          </button>
+
+          <!-- User Profile Panel Dropdown -->
+          <div class="dropdown">
+            <div class="dashboard-profile-panel" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="dashboard-profile-avatar-wrap">
+                <div class="dashboard-profile-avatar">MC</div>
+                <span class="status-dot"></span>
+              </div>
+              <div class="dashboard-profile-info d-none d-sm-flex">
+                <span class="dashboard-profile-name">Marcus Chen</span>
+                <span class="dashboard-profile-role">Premium Client &bull; ID: #1042</span>
+              </div>
+              <svg class="dashboard-profile-caret" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
+            </div>
+            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm glass-card p-2" style="background: var(--bg-card); min-width: 180px; z-index: 1050;">
+              <li><a class="dropdown-item rounded-3 py-2" href="#" onclick="document.querySelector('[data-section=\'profile\']').click();">Profile Settings</a></li>
+              <li><hr class="dropdown-divider" style="border-color: var(--border-color);"></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      <!-- ==========================================================================
+           TAB 1: Overview
+           ========================================================================== */ -->
+      <section class="dashboard-section p-0" id="overview">
+        <!-- Welcome Message Card -->
+        <div class="glass-card mb-4 p-4 text-start reveal" style="background: linear-gradient(135deg, rgba(10, 92, 54, 0.04) 0%, rgba(82, 183, 136, 0.04) 100%); border-left: 4px solid var(--accent); border-radius: 12px;">
+          <h2 class="h4 text-main mb-2" style="font-weight: 600;">Welcome back, Marcus Chen!</h2>
+          <p class="mb-0 small text-muted">Manage your home renovation project stages, approve material selections, and review design milestones below.</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="row g-4 mb-5 text-start">
+          <div class="col-sm-6 col-xl-3">
+            <div class="dashboard-stat-card">
+              <span class="small text-muted d-block mb-1">Project Milestones</span>
+              <h3 class="mb-0 text-primary" style="font-weight: 600;"><span class="dashboard-stat-counter" data-target="3">0</span> of 5 Stages</h3>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="dashboard-stat-card">
+              <span class="small text-muted d-block mb-1">Total Work Hours</span>
+              <h3 class="mb-0 text-success" style="font-weight: 600;"><span class="dashboard-stat-counter" data-target="142">0</span> hours</h3>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="dashboard-stat-card">
+              <span class="small text-muted d-block mb-1">Lead Architect</span>
+              <h3 class="mb-0" style="color: var(--accent); font-weight: 600;">S. Sterling</h3>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="dashboard-stat-card">
+              <span class="small text-muted d-block mb-1">Budget Utilized</span>
+              <h3 class="mb-0 text-info" style="font-weight: 600;"><span class="dashboard-stat-counter" data-target="68">0</span>%</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Training Hours Line Chart -->
+        <div class="row text-start">
+          <div class="col-12">
+            <div class="glass-card mb-4" style="min-height: 400px;">
+              <h3 class="h5 mb-4 d-flex align-items-center gap-2" style="font-weight: 500;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--accent)" class="bi bi-calendar3" viewBox="0 0 16 16">
+                  <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>
+                  <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                </svg>
+                Project Budget & Progress Tracking
+              </h3>
+              <div style="height: 320px; position:relative;">
+                <canvas id="sessionsChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB 2: Venue Booking History
+           ========================================================================== */ -->
+      <section class="dashboard-section d-none p-0" id="venue-booking">
+        <div class="glass-card text-start">
+          <h3 class="h5 mb-4 d-flex align-items-center gap-2" style="font-weight: 500;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--accent)" class="bi bi-calendar-check" viewBox="0 0 16 16">
+              <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+              <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+            </svg>
+            Ongoing Construction Milestones
+          </h3>
+          
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Stage ID</th>
+                  <th>Target Completion</th>
+                  <th>Renovation Scope</th>
+                  <th>Progress Stage</th>
+                  <th>Sign-off Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#STG-01</td>
+                  <td>October 18, 2026</td>
+                  <td>Kitchen Framing & Electrical</td>
+                  <td>100% Completed</td>
+                  <td><span class="badge bg-success">Approved</span></td>
+                  <td><button class="btn btn-sm btn-outline-secondary" disabled>Signed-off</button></td>
+                </tr>
+                <tr>
+                  <td>#STG-02</td>
+                  <td>November 05, 2026</td>
+                  <td>Cabinetry & Trim Installation</td>
+                  <td>40% In Progress</td>
+                  <td><span class="badge bg-warning text-dark">In Progress</span></td>
+                  <td><button class="btn btn-sm btn-outline-primary" onclick="cancelReservation(this)">Approve Milestone</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB 3: Material Selections
+           ========================================================================== */ -->
+      <section class="dashboard-section d-none p-0" id="social-events">
+        <div class="glass-card text-start">
+          <h3 class="h5 mb-4 d-flex align-items-center gap-2" style="font-weight: 500;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--accent)" class="bi bi-palette" viewBox="0 0 16 16">
+              <path d="M8 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm4 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM5.5 7a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+              <path d="M16 8c0 3.15-1.866 2.585-3.5 2.5-1.5-.08-2.65-.27-3.5-1-.88-.75-1-1.88-1-3.5 0-3.34 2.87-6 6.5-6C12.55 0 16 3.43 16 8zm-1.5 0c0-3.345-2.685-5-5-5-2.85 0-5 2.215-5 5 0 1.34.09 2.185.75 2.75.565.485 1.36.65 2.75.75 1.77.13 6.5.64 6.5-3.5z"/>
+            </svg>
+            Approved Material Selections
+          </h3>
+          
+          <div class="table-responsive mb-4">
+            <table class="table table-hover align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Material Name</th>
+                  <th>Style Category</th>
+                  <th>Selected Date</th>
+                  <th>Supplier / Vendor</th>
+                  <th>Delivery Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Calacatta Gold Quartz Countertop</strong></td>
+                  <td>Bespoke Kitchen Fit-Out</td>
+                  <td>September 15, 2026</td>
+                  <td>Stone Specialists Guild</td>
+                  <td><span class="badge bg-success">Delivered</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="h5 mb-4 d-flex align-items-center gap-2" style="font-weight: 500;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--accent)" class="bi bi-calendar-event" viewBox="0 0 16 16">
+              <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
+              <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+            </svg>
+            Site Visit & Showroom Schedule
+          </h3>
+          <div class="table-responsive">
+            <table class="table table-sm table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>Date & Time</th>
+                  <th>Meeting Type</th>
+                  <th>Location / Agenda</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-active">
+                  <td><strong>Oct 12, 2026</strong></td>
+                  <td><strong>Framing Inspection</strong></td>
+                  <td>Main Residence (Marcus Site)</td>
+                  <td><strong>Scheduled</strong></td>
+                </tr>
+                <tr>
+                  <td>Oct 15, 2026</td>
+                  <td>Material Showroom Tour</td>
+                  <td>Design District Office</td>
+                  <td>Completed</td>
+                </tr>
+                <tr>
+                  <td>Oct 20, 2026</td>
+                  <td>Final Paint Review</td>
+                  <td>Main Residence (Marcus Site)</td>
+                  <td>Pending Confirmation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB 4: Design & Approvals
+           ========================================================================== */ -->
+      <!-- ==========================================================================
+           TAB 4: Design & Approvals
+           ========================================================================== */ -->
+      <section class="dashboard-section d-none p-0" id="planning-progress">
+        <!-- Row 1: Design & Material Selection Match (Redesigned 12-column split card) -->
+        <div class="row g-4 text-start">
+          <div class="col-12">
+            <div class="glass-card">
+              <h3 class="h5 mb-4 d-flex align-items-center gap-2" style="font-weight: 500;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--accent)" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"/>
+                </svg>
+                Design & Material Selection Match Analysis
+              </h3>
+              
+              <div class="row g-4">
+                <!-- Metrics breakdown grid -->
+                <div class="col-12">
+                  <div class="p-3 rounded-4 border border-secondary border-opacity-10 mb-3" style="background: rgba(var(--primary-rgb), 0.02);">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <span class="text-main" style="font-weight: 600;">Overall Match Alignment</span>
+                      <span class="badge bg-success-subtle text-success px-3 py-1.5 rounded-pill border border-success border-opacity-25" style="font-size: 0.8rem; font-weight: 600;">84% Accordance</span>
+                    </div>
+                    <div class="progress rounded-pill" style="height: 6px; background: rgba(var(--primary-rgb), 0.05);">
+                      <div class="progress-bar bg-success rounded-pill" style="width: 84%;"></div>
+                    </div>
+                  </div>
+
+                  <div class="row g-3">
+                    <div class="col-sm-6">
+                      <div class="p-3 rounded-4 border border-secondary border-opacity-10 h-100" style="background: var(--bg-card);">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                          <span class="small font-monospace" style="color: var(--accent);">01 / SPATIAL</span>
+                          <strong class="text-main">78%</strong>
+                        </div>
+                        <h4 class="h6 mb-2" style="font-weight: 500;">Spatial Layout Mapping</h4>
+                        <p class="small text-muted mb-0">Custom open-plan kitchen and vanity layouts.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <div class="p-3 rounded-4 border border-secondary border-opacity-10 h-100" style="background: var(--bg-card);">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                          <span class="small font-monospace" style="color: var(--accent);">02 / JOINERY</span>
+                          <strong class="text-main">65%</strong>
+                        </div>
+                        <h4 class="h6 mb-2" style="font-weight: 500;">Bespoke Carpentry</h4>
+                        <p class="small text-muted mb-0">Cabinetry & quartz slab alignments.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <div class="p-3 rounded-4 border border-secondary border-opacity-10 h-100" style="background: var(--bg-card);">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                          <span class="small font-monospace" style="color: var(--accent);">03 / ACOUSTIC</span>
+                          <strong class="text-main">92%</strong>
+                        </div>
+                        <h4 class="h6 mb-2" style="font-weight: 500;">Drywall & Insulation</h4>
+                        <p class="small text-muted mb-0">High-R thermal barriers & soundproofing.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <div class="p-3 rounded-4 border border-secondary border-opacity-10 h-100" style="background: var(--bg-card);">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                          <span class="small font-monospace" style="color: var(--accent);">04 / SMART TECH</span>
+                          <strong class="text-main">85%</strong>
+                        </div>
+                        <h4 class="h6 mb-2" style="font-weight: 500;">Smart Home Tech</h4>
+                        <p class="small text-muted mb-0">LED scene controllers and voice nodes.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: Pending Design & Swatch Approvals -->
+        <div class="row g-4 mt-2 text-start">
+          <div class="col-12">
+            <div class="glass-card">
+              <h3 class="h5 mb-4 d-flex align-items-center gap-2" style="font-weight: 500;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--accent)" class="bi bi-shield-check" viewBox="0 0 16 16">
+                  <path d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.135.952 7.64 4.88 10.14a.48.48 0 0 0 .524 0c3.928-2.5 5.434-6.005 4.88-10.14a.48.48 0 0 0-.328-.39 61 61 0 0 0-2.837-.857L8 1.299zM7.5 1.701l2.404.72a53 53 0 0 1 2.219.743c.385 3.364-.812 6.187-3.973 8.358L8 11.662l-.15-.103C4.69 9.388 3.493 6.566 3.878 3.204c.73-.243 1.472-.486 2.219-.743l2.403-.72z"/>
+                  <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+                </svg>
+                Pending Design & Swatch Approvals
+              </h3>
+              
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                  <thead>
+                    <tr>
+                      <th>Document / Swatch</th>
+                      <th>Design Stage</th>
+                      <th>Submitted Date</th>
+                      <th>Approval Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-pdf text-danger" viewBox="0 0 16 16"><path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/><path d="M8 12v-2.5h1.5a.5.5 0 0 0 0-1H8V7a.5.5 0 0 0-1 0v1.5H5.5a.5.5 0 0 0 0 1H7V12a.5.5 0 0 0 1 0"/></svg>
+                          <strong>Kitchen 3D Renderings (V2)</strong>
+                        </div>
+                      </td>
+                      <td>Bespoke Kitchen Fit-Out</td>
+                      <td>Oct 11, 2026</td>
+                      <td><span class="badge bg-warning text-dark px-3 py-2 rounded-3 border border-warning border-opacity-25" id="approval-status-1" style="font-weight: 500;">Pending Client Approval</span></td>
+                      <td>
+                        <div class="d-flex gap-2">
+                          <button class="btn btn-sm btn-premium-secondary" onclick="approveDesignItem(this, 1)">Approve</button>
+                          <button class="btn btn-sm btn-premium-outline" onclick="requestChanges(this, 1)">Request</button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-image text-info" viewBox="0 0 16 16"><path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/><path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/></svg>
+                          <strong>Spatial Lighting Scenario Map</strong>
+                        </div>
+                      </td>
+                      <td>Bespoke Interior Fit-Out</td>
+                      <td>Oct 08, 2026</td>
+                      <td><span class="badge bg-success px-3 py-2 rounded-3 border border-success border-opacity-25" style="font-weight: 500;">Approved by Client</span></td>
+                      <td><button class="btn btn-sm btn-premium-outline justify-content-center text-main" style="border-color: var(--border-color);" disabled>Approved</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB 5: Member Profile Settings
+           ========================================================================== */ -->
+      <section class="dashboard-section d-none p-0" id="profile">
+        <div class="glass-card text-start">
+          <h3 class="h5 mb-4 d-flex align-items-center gap-2" style="font-weight: 500;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--accent)" class="bi bi-gear" viewBox="0 0 16 16">
+              <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
+              <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.893 1.64.902 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.185 1.185l-.16.291a1.873 1.873 0 0 0 1.115 2.693l.319.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.185l-.291-.16a1.873 1.873 0 0 0-2.693 1.115l-.094.319c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.693-1.115l-.291.16c-.764.415-1.6-.42-1.185-1.185l.16-.291a1.873 1.873 0 0 0-1.115-2.693l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094a1.873 1.873 0 0 0 1.115-2.693l-.16-.291c-.415-.764.42-1.6 1.185-1.185l.291.16a1.873 1.873 0 0 0 2.693-1.115z"/>
+            </svg>
+            Personal Settings
+          </h3>
+          
+          <form id="profileSettingsForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label small">Client Display Name</label>
+                <input type="text" class="form-control rounded-3" value="Marcus Chen" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small">Email Address</label>
+                <input type="email" class="form-control rounded-3" value="marcus.chen@outlook.com" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small">Change Password</label>
+                <input type="password" class="form-control rounded-3" placeholder="••••••••">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small">Active Renovation Package</label>
+                <input type="text" class="form-control rounded-3" value="Luxury Kitchen Remodeling ($15,500)" disabled>
+              </div>
+              <div class="col-12 mb-3">
+                <label class="form-label small">Preferred Project Notification Alerts</label>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="notifyEmail" checked>
+                  <label class="form-check-label small" for="notifyEmail">Email alerts for upcoming schedule updates and design notes</label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="notifySms" checked>
+                  <label class="form-check-label small" for="notifySms">SMS alerts for site-visit updates and milestone approvals</label>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn-premium-primary mt-3">Save Preferences</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Bootstrap 5 Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Core Javascript -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Dashboard Controller JS -->
+  <script src="assets/js/dashboard.js"></script>
+
+  <script>
+    // Handles milestone approvals in the milestones grid
+    function cancelReservation(button) {
+      if (confirm("Are you sure you want to sign off on this project milestone stage?")) {
+        const row = button.closest('tr');
+        
+        // Find and update the status badge
+        const statusBadge = row.querySelector('.badge');
+        if (statusBadge) {
+          statusBadge.textContent = 'Approved';
+          statusBadge.className = 'badge bg-success';
+        }
+        
+        button.disabled = true;
+        button.textContent = 'Signed-off';
+        button.className = 'btn btn-sm btn-outline-secondary';
+        
+        // Dynamic stats counters update
+        const counter = document.querySelector('.dashboard-stat-counter[data-target="3"]');
+        if (counter) {
+          counter.textContent = '4';
+        }
+      }
+    }
+
+    // Handles design document approvals
+    function approveDesignItem(button, id) {
+      if (confirm("Are you sure you want to approve this design submission?")) {
+        const badge = document.getElementById(`approval-status-${id}`);
+        if (badge) {
+          badge.textContent = 'Approved by Client';
+          badge.className = 'badge bg-success px-3 py-2 rounded-3 border border-success border-opacity-25';
+        }
+        const actionCell = button.closest('td');
+        if (actionCell) {
+          actionCell.innerHTML = '<button class="btn btn-sm btn-premium-outline justify-content-center text-main" style="border-color: var(--border-color);" disabled>Approved</button>';
+        }
+      }
+    }
+
+    // Handles design document change requests
+    function requestChanges(button, id) {
+      const comment = prompt("Please enter details of the revision or changes you request:");
+      if (comment !== null && comment.trim() !== "") {
+        const badge = document.getElementById(`approval-status-${id}`);
+        if (badge) {
+          badge.textContent = 'Revision Requested';
+          badge.className = 'badge bg-danger text-light px-3 py-2 rounded-3 border border-danger border-opacity-25';
+        }
+        const actionCell = button.closest('td');
+        if (actionCell) {
+          actionCell.innerHTML = '<button class="btn btn-sm btn-premium-outline justify-content-center text-main" style="border-color: var(--border-color);" disabled>Revision Requested</button>';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
