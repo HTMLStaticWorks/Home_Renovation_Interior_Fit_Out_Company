@@ -205,7 +205,7 @@ section {
 }
 
 .section-tag {
-  color: var(--electric-blue);
+  color: var(--primary);
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -222,6 +222,14 @@ section {
   font-weight: 700 !important;
   letter-spacing: 0.22em !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* High contrast overrides for section-tags inside primary green sections */
+section.bg-primary .section-tag,
+.bg-primary .section-tag {
+  color: #A7E9CB !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
 }
 
 .text-main {
@@ -419,9 +427,9 @@ section {
 
 /* Theme / RTL Toggles */
 .utility-btn {
-  background: transparent;
+  background: rgba(10, 92, 54, 0.05);
   border: 1.5px solid var(--primary);
-  color: var(--text-main);
+  color: var(--primary);
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -429,13 +437,14 @@ section {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: var(--transition-fast);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .utility-btn:hover {
   background: var(--primary);
-  color: var(--accent);
+  color: var(--text-light);
   border-color: var(--primary);
+  transform: rotate(15deg) scale(1.08);
 }
 
 /* Mobile Hamburger */
@@ -577,11 +586,11 @@ section {
   }
 
   .navbar-collapse-mobile .utility-btn {
-    flex: 1 1 0%;
-    width: auto !important;
+    flex: 0 0 auto !important;
+    width: 48px !important;
     height: 48px !important;
-    border-radius: 50px !important;
-    padding: 0 1.5rem !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
   }
   
   .reveal-left, .reveal-right {
@@ -1734,5 +1743,11 @@ body.dark-mode .hero-luxury-mobile-img-wrapper {
 
 .hero-luxury-mobile-img-wrapper:hover img {
   transform: scale(1.03);
+}
+
+/* Disable duplicate Bootstrap Icons rendering on inline SVG tags */
+svg::before,
+svg::after {
+  content: none !important;
 }
 

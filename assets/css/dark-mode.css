@@ -227,4 +227,36 @@ body.dark-mode .navbar-rallyx .nav-link:hover {
 /* Green outline border for utility buttons in dark mode */
 body.dark-mode .utility-btn {
   border: 1.5px solid var(--accent) !important;
+  color: var(--accent) !important;
+  background: rgba(82, 183, 136, 0.08) !important;
 }
+
+body.dark-mode .utility-btn:hover {
+  background: var(--accent) !important;
+  color: var(--bg-main) !important;
+  border-color: var(--accent) !important;
+}
+
+/* High contrast overrides for text-primary and bg-primary in dark mode */
+body.dark-mode .text-primary {
+  color: var(--accent) !important;
+}
+body.dark-mode .bg-primary {
+  background-color: var(--accent) !important;
+}
+
+/* High contrast override for section-tag in dark mode */
+body.dark-mode .section-tag {
+  color: var(--accent) !important;
+}
+
+/* Table badges styling in dark mode */
+body.dark-mode .table .badge.bg-primary.text-primary {
+  background-color: rgba(82, 183, 136, 0.15) !important;
+  color: var(--accent) !important;
+}
+body.dark-mode .table .badge.bg-secondary.text-secondary {
+  background-color: rgba(157, 181, 167, 0.15) !important;
+  color: var(--text-muted) !important;
+}
+
