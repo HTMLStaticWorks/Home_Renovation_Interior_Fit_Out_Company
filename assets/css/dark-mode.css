@@ -245,9 +245,19 @@ body.dark-mode .bg-primary {
   background-color: var(--accent) !important;
 }
 
+/* Maintain dark forest green background for primary sections in dark mode */
+body.dark-mode section.bg-primary {
+  background-color: var(--primary) !important;
+}
+
 /* High contrast override for section-tag in dark mode */
 body.dark-mode .section-tag {
   color: var(--accent) !important;
+}
+
+/* Ensure high contrast for section tags inside dark primary sections */
+body.dark-mode section.bg-primary .section-tag {
+  color: #A7E9CB !important;
 }
 
 /* Table badges styling in dark mode */
