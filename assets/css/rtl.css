@@ -136,37 +136,48 @@
   border-bottom-right-radius: var(--bs-border-radius, 0.375rem) !important;
 }
 
+/* Navbar Dropdown Caret Spacing for RTL */
+[dir="rtl"] .navbar-rallyx .dropdown-toggle::after {
+  margin-left: 0 !important;
+  margin-right: 0.55rem !important;
+}
+
 /* ==========================================================================
    Hero Section (Home 1) - RTL Button Alignment
    ========================================================================== */
 
-/* On desktop, align button group to the right (logical start in RTL) */
-[dir="rtl"] .hero-classic .justify-content-lg-start {
-  justify-content: flex-end !important;
+/* Center button group in Home 1 hero section in RTL mode */
+[dir="rtl"] .hero-classic .justify-content-lg-start,
+[dir="rtl"] .hero-classic .d-sm-flex {
+  justify-content: center !important;
 }
 
-/* On mobile (d-grid), buttons are full-width — keep them stretched */
-@media (max-width: 575.98px) {
-  [dir="rtl"] .hero-classic .justify-content-lg-start {
-    justify-content: stretch !important;
-  }
-}
-
-/* Hero description paragraph: reset ltr-only left-margin override */
+/* Hero description paragraph: center margin in RTL mode */
 [dir="rtl"] .hero-classic .desc.ms-lg-0 {
-  margin-right: 0 !important;
+  margin-right: auto !important;
   margin-left: auto !important;
 }
 
+/* Fix Bootstrap physical text alignment classes in RTL mode */
+[dir="rtl"] .text-start,
+[dir="rtl"] .text-sm-start,
+[dir="rtl"] .text-md-start,
+[dir="rtl"] .text-lg-start {
+  text-align: right !important;
+}
+
+[dir="rtl"] .text-end,
+[dir="rtl"] .text-sm-end,
+[dir="rtl"] .text-md-end,
+[dir="rtl"] .text-lg-end {
+  text-align: left !important;
+}
+
 /* ==========================================================================
-   Home 2 Visual Arena Section - RTL Button Alignment
+   Home 2 Visual Arena & Interior Design Experience Section - RTL Alignments
    ========================================================================== */
 
-/* In RTL, text-md-end flips to the left, and text-start on mobile also
-   sits on the wrong side — override both so the button always aligns to
-   the logical end (right-to-left visual right = physical left). */
-[dir="rtl"] .home-2-gallery-header .text-md-end,
-[dir="rtl"] .home-2-gallery-header .text-start {
+[dir="rtl"] .home-2-gallery-header .text-md-end {
   text-align: end !important;
 }
 
